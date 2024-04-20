@@ -1,6 +1,6 @@
 <?php
 
-namespace xPaw;
+namespace EasyX;
 
 class MinecraftPing
 {
@@ -82,7 +82,7 @@ class MinecraftPing
 	}
 
 	/** @return array|false */
-	public function Query( ) : array|bool
+	public function Query( $protocolVersion = 4 ) : array|bool
 	{
 		if( $this->Socket === null )
 		{
@@ -94,7 +94,20 @@ class MinecraftPing
 		// See http://wiki.vg/Protocol (Status Ping)
 		$Data = "\x00"; // packet ID = 0 (varint)
 
-		$Data .= "\xff\xff\xff\xff\x0f"; // Protocol version (varint)
+		$_protocol = $protocolVersion;
+		$hex = '';
+		while (true) {
+			if (($_protocol & 0xFFFFFF80) == 0) {
+				$hex .= sprintf('\x%02s', dechex($_protocol));
+				break;
+			}
+
+			$hex .= sprintf('\x%02s', dechex($_protocol & 0x7F | 0x80));
+			$_protocol >>= 7;
+		}
+
+		eval("\$Data .= \"{$hex}\";");
+
 		$Data .= \pack( 'c', \strlen( $this->ServerAddress ) ) . $this->ServerAddress; // Server (varint len + UTF-8 addr)
 		$Data .= \pack( 'n', $this->ServerPort ); // Server port (unsigned short)
 		$Data .= "\x01"; // Next state: status (varint)

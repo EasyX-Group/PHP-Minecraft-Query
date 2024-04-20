@@ -1,6 +1,6 @@
 <?php
 
-namespace xPaw;
+namespace EasyX;
 
 class MinecraftQueryException extends \Exception
 {
