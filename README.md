@@ -32,15 +32,15 @@ This library automatically tries to resolve SRV records. If you do not wish to d
 <?php
 	require __DIR__ . '/src/MinecraftPing.php';
 	require __DIR__ . '/src/MinecraftPingException.php';
-	
+
 	use xPaw\MinecraftPing;
 	use xPaw\MinecraftPingException;
-	
+
 	try
 	{
 		$Query = new MinecraftPing( 'localhost', 25565 );
-		
-		print_r( $Query->Query() );
+
+		print_r( $Query->Query($protocolVersion = 4) );
 	}
 	catch( MinecraftPingException $e )
 	{
@@ -66,16 +66,16 @@ If the server has query enabled (`enable-query`), then you can use `MinecraftQue
 <?php
 	require __DIR__ . '/src/MinecraftQuery.php';
 	require __DIR__ . '/src/MinecraftQueryException.php';
-	
+
 	use xPaw\MinecraftQuery;
 	use xPaw\MinecraftQueryException;
-	
+
 	$Query = new MinecraftQuery( );
-	
+
 	try
 	{
 		$Query->Connect( 'localhost', 25565 );
-		
+
 		print_r( $Query->GetInfo( ) );
 		print_r( $Query->GetPlayers( ) );
 	}
