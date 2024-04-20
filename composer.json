@@ -17,6 +17,6 @@
 	},
 	"autoload":
 	{
-		"psr-4": { "xPaw\\": "src" }
+		"psr-4": { "EasyX\\": "src" }
 	}
 }
