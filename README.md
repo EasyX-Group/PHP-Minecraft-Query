@@ -33,24 +33,20 @@ This library automatically tries to resolve SRV records. If you do not wish to d
 	require __DIR__ . '/src/MinecraftPing.php';
 	require __DIR__ . '/src/MinecraftPingException.php';
 
-	use xPaw\MinecraftPing;
-	use xPaw\MinecraftPingException;
+	use EasyX\MinecraftPing;
+	use EasyX\MinecraftPingException;
 
-	try
-	{
-		$Query = new MinecraftPing( 'localhost', 25565 );
+	try {
+		$query = new MinecraftPing('localhost', 25565);
 
-		print_r( $Query->Query($protocolVersion = 4) );
+		print_r($query->Query($protocolVersion = 4));
 	}
-	catch( MinecraftPingException $e )
-	{
+	catch(MinecraftPingException $e) {
 		echo $e->getMessage();
 	}
-	finally
-	{
-		if( $Query )
-		{
-			$Query->Close();
+	finally {
+		if ($query) {
+			$query->Close();
 		}
 	}
 ?>
@@ -67,21 +63,19 @@ If the server has query enabled (`enable-query`), then you can use `MinecraftQue
 	require __DIR__ . '/src/MinecraftQuery.php';
 	require __DIR__ . '/src/MinecraftQueryException.php';
 
-	use xPaw\MinecraftQuery;
-	use xPaw\MinecraftQueryException;
+	use EasyX\MinecraftQuery;
+	use EasyX\MinecraftQueryException;
 
-	$Query = new MinecraftQuery( );
+	$query = new MinecraftQuery();
 
-	try
-	{
-		$Query->Connect( 'localhost', 25565 );
+	try {
+		$query->Connect('localhost', 25565);
 
-		print_r( $Query->GetInfo( ) );
-		print_r( $Query->GetPlayers( ) );
+		print_r($query->GetInfo());
+		print_r($query->GetPlayers());
 	}
-	catch( MinecraftQueryException $e )
-	{
-		echo $e->getMessage( );
+	catch(MinecraftQueryException $e) {
+		echo $e->getMessage();
 	}
 ?>
 ```
